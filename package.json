@@ -5,6 +5,7 @@
   "author": "Patchara Suwanwanakul <salamtam.p@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "webpack",
     "start": "webpack-dev-server"
   },
   "devDependencies": {
