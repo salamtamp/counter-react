@@ -1,32 +1,38 @@
 import React, { Component } from 'react'
+import store from '../store'
 
 export default class Counter extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      counter: 0,
-    }
     this.addCounter = this.addCounter.bind(this)
     this.subtractCounter = this.subtractCounter.bind(this)
   }
 
+  componentWillMount() {
+    this.unsubscribe = store.subscribe(() => {
+      this.forceUpdate();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   addCounter() {
-    this.setState({
-      counter: this.state.counter + 1
-    })
+    store.dispatch({ type: 'ADD_COUNTER' });
   }
 
   subtractCounter() {
-    this.setState({
-      counter: this.state.counter - 1
-    })
+    store.dispatch({ type: 'SUBTRACT_COUNTER' });
   }
 
   render() {
+    let state = store.getState();
+
     return (
       <div className="counter">
         <h1>{this.props.label}</h1>
-        <h2>{this.state.counter}</h2>
+        <h2>{state.counter}</h2>
         <button onClick={this.addCounter}>+1</button>
         <button onClick={this.subtractCounter}>-1</button>
       </div>
