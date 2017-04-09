@@ -7,11 +7,18 @@ export default class Counter extends Component {
       counter: 0,
     }
     this.addCounter = this.addCounter.bind(this)
+    this.subtractCounter = this.subtractCounter.bind(this)
   }
 
   addCounter() {
     this.setState({
       counter: this.state.counter + 1
+    })
+  }
+
+  subtractCounter() {
+    this.setState({
+      counter: this.state.counter - 1
     })
   }
 
@@ -21,6 +28,7 @@ export default class Counter extends Component {
         <h1>{this.props.label}</h1>
         <h2>{this.state.counter}</h2>
         <button onClick={this.addCounter}>+1</button>
+        <button onClick={this.subtractCounter}>-1</button>
       </div>
     )
   }
